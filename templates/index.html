@@ -1,0 +1,96 @@
+<!DOCTYPE html>    
+<html>
+<head>
+    <title>Admission Chance Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 30px;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Admission Chance Predictor</h2>
+        <form action="/predict" method="post">
+            <label for="gre">GRE Score (260-350)</label>
+            <input type="number" name="gre" required min="260" max="350" step="1">
+
+            <label for="toefl">TOEFL Score (90-125)</label>
+            <input type="number" name="toefl" required min="90" max="125" step="1">
+
+            <label for="university">University Rating (1-5)</label>
+            <input type="number" name="university" required min="1" max="5" step="1">
+
+            <label for="sop">SOP Rating (1-5)</label>
+            <input type="number" name="sop" required min="1" max="5" step="0.5">
+
+            <label for="lor">LOR Rating (1-5)</label>
+            <input type="number" name="lor" required min="1" max="5" step="0.5">
+
+            <label for="cgpa">CGPA (6-10)</label>
+            <input type="number" name="cgpa" required min="6" max="10" step="0.01">
+
+            <label for="research">Research Experience</label>
+            <select name="research" required>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            <button type="submit" class="btn">Predict Chance</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            Predicted Chance of Admission: {{ prediction }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
